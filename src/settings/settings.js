@@ -86,6 +86,12 @@ const settings = convict({
   },
 });
 
+process.env.NODE_ENV === 'production' ?
+    settings.loadFile('.env.prod.json')
+:process.env.NODE_ENV === 'test' ?
+    settings.loadFile('.env.test.json')
+    :settings.loadFile('.env.json');
+
 settings.validate();
 
 
